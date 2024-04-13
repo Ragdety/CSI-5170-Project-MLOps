@@ -9,8 +9,8 @@ zenml -v
 
 if %errorlevel% NEQ 0 (
     echo ERROR: Installing zenml failed...
-    echo FAILED COMMAND: pip install zenml[server]
-    call :FAIL
+    echo FAILED COMMAND: pip install zenml[server] or zenml -v
+    goto :FAIL
 )
 echo INFO: Successfully installed zenml
 
@@ -21,12 +21,12 @@ zenml integration install sklearn -y
 if %errorlevel% NEQ 0 (
     echo ERROR: Installing sklearn inside zenml failed...
     echo FAILED COMMAND: zenml integration install sklearn -y
-    call :FAIL
+    goto :FAIL
 )
 echo INFO: Successfully installed sklearn for zenml
 
 
-call :SUCCESS
+goto :SUCCESS
 exit /b
 
 
