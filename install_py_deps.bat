@@ -1,7 +1,7 @@
+@echo off
+
 REM Author: Edgar Terrazas
 REM Date: May 2022
-
-@echo off
 
 REM Make sure pip is up-to-date
 echo Updating pip...
@@ -29,7 +29,7 @@ if %errorlevel% NEQ 0 (
 
 REM Print information about pipreqs
 echo Information about pipreqs:
-pipreqs --help
+pip show pipreqs
 if %errorlevel% NEQ 0 (
     echo ERROR: Failed to get information about pipreqs.
     goto :FAIL
