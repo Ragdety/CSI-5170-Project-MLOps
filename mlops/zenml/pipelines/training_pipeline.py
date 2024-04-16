@@ -6,11 +6,11 @@ from steps.evaluation import evaluate_model
 
 
 @pipeline
-def training_pipeline(data_path: str):
+def training_pipeline(data_path: str, names=None):
   """
   Training pipeline
   """
-  df = read_data(data_path)
+  df = read_data(data_path, names=names)
   clean_data(df)
   train_model(df)
   evaluate_model(df)

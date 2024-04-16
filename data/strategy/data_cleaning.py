@@ -27,7 +27,14 @@ class DataPreProcessingStrategy(DataStrategy):
     """
     try:
       # TODO: Add our data preprocessing logic here
-      df = df.dropna()
+
+      # Adding dummy SVC model for now
+      # Replace '?' with NaN and drop rows with missing values
+      df.replace('?', np.nan, inplace=True)
+      df.dropna(inplace=True)
+
+      # Convert 'Class' column to binary labels
+      df['Class'] = df['Class'].map(lambda x: 1 if x == 4 else 0)
       return df
     except Exception as e:
       logging.error(f"Error while preprocessing data: {e}")
@@ -43,12 +50,11 @@ class DataSplitStrategy(DataStrategy):
     """
     try:
       # TODO: Add our data splitting logic here
-      X = df.iloc[:, :-1]
-      y = df.iloc[:, -1]
+      # Split dataset into features and target variable
+      X = df.drop(['Sample code number', 'Class'], axis=1)
+      y = df['Class']
 
-      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-      return X_train, X_test, y_train, y_test
+      return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
       # return df
     except Exception as e:
       logging.error(f"Error while splitting data: {e}")
