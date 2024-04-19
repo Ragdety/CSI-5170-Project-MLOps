@@ -4,6 +4,8 @@ import pandas as pd
 
 from abc import ABC, abstractmethod
 from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+from sklearn.utils import shuffle
 from typing import Union
 
 
@@ -53,6 +55,10 @@ class DataSplitStrategy(DataStrategy):
       # Split dataset into features and target variable
       X = df.drop(['Sample code number', 'Class'], axis=1)
       y = df['Class']
+      # data = load_breast_cancer()
+      # X, y = data.data, data.target
+
+      # X,y = shuffle(X,y, random_state=16)
 
       return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
       # return df

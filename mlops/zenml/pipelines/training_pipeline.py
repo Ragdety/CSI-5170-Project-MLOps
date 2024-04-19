@@ -11,7 +11,7 @@ def training_pipeline(data_path: str, names=None):
   Training pipeline
   """
   df = read_data(data_path, names=names)
-  clean_data(df)
-  train_model(df)
+  X_test, X_train, y_train, y_test = clean_data(df)
+  train_model(X_test, X_train, y_train, y_test)
   evaluate_model(df)
 
