@@ -1,5 +1,5 @@
 # CSI-5170-Project-MLOps
-MLOps pipeline project for a pedestrian detection algorithm. The purpose of this project is to learn about MLOps pipelines applied to object detection algorithms. 
+The purpose of this project is to learn about MLOps pipelines applied to basic machine learning algorithms. 
 
 This is the final project for class "CSI-5170 - Machine Learning" at Oakland University. We decided to take our industry experience and apply it into a more practical project to enhance our skills in Machine Learning Operations, the future of ML!
 
