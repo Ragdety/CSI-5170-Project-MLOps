@@ -25,6 +25,17 @@ if %errorlevel% NEQ 0 (
 )
 echo INFO: Successfully installed sklearn for zenml
 
+REM Install mlflow for zenml
+echo INFO: Installing mlflow for zenml
+zenml integration install mlflow -y
+
+if %errorlevel% NEQ 0 (
+    echo ERROR: Installing mlflow inside zenml failed...
+    echo FAILED COMMAND: zenml integration install mlflow -y
+    goto :FAIL
+)
+echo INFO: Successfully installed mlflow for zenml
+
 
 goto :SUCCESS
 exit /b

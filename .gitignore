@@ -1,4 +1,6 @@
 requirements_backup.txt
+mlruns/
+.zen/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

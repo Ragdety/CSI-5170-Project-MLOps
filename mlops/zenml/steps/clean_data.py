@@ -5,6 +5,7 @@ from zenml import step
 from data.strategy.data_cleaning import DataPreProcessingStrategy, DataSplitStrategy, DataCleaning
 from typing_extensions import Annotated
 from typing import Tuple
+from sklearn.feature_extraction.text import _VectorizerMixin
 
 
 @step
@@ -13,6 +14,7 @@ def clean_data(df: pd.DataFrame) -> Tuple[
     Annotated[pd.DataFrame, "X_test"], 
     Annotated[pd.Series, "y_train"], 
     Annotated[pd.Series, "y_test"], 
+    Annotated[_VectorizerMixin, "Spam_Vectorizer"], 
 ]:
   """
   A step function to clean the data. It takes a DataFrame as input.
@@ -34,10 +36,10 @@ def clean_data(df: pd.DataFrame) -> Tuple[
     # Note: processed_data is passed into the split strategy
     split_strategy = DataSplitStrategy()
     dc_split = DataCleaning(processed_data, split_strategy)
-    X_train, X_test, y_train, y_test = dc_split.handle_data()
+    (X_train, X_test, y_train, y_test), vectorizer = dc_split.handle_data()
 
     logging.info(f"Data cleaned and split completed")
-    return X_train, X_test, y_train, y_test
+    return X_train, X_test, y_train, y_test, vectorizer
   except Exception as e:
     logging.error(f"Error while cleaning data: {e}")
     raise e

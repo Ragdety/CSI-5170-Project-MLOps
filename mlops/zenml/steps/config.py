@@ -1,4 +1,5 @@
 from zenml.steps import BaseParameters 
+from constants import *
 
 class ModelNameConfig(BaseParameters):
-    model_name : str = "LogisticRegression"
+  model_name : str = LOGISTIC_REGRESSION

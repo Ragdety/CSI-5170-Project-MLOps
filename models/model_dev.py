@@ -1,7 +1,8 @@
-import logging 
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
 from abc import ABC, abstractmethod
-from models.RegularizedRegression import myRegularizedRegression
+from models.LogisticRegression import MyLogisticRegression
+from models.NaiveBayes import MyNaiveBayes
 
 
 class Model(ABC):
@@ -10,14 +11,32 @@ class Model(ABC):
         pass
 
 
-class RegularizedRegressionModel(Model):
+class MyLogisticRegressionModel(Model):
     def train(self, X_train, y_train):
-        my_model = myRegularizedRegression()
-        trained_RR = my_model.train_logistic_regression(X_train, y_train)
-        return trained_RR
+        model = MyLogisticRegression()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
+    
+class LogisticRegressionModel(Model):
+    def train(self, X_train, y_train):
+        model = LogisticRegression()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
 
 class LinearRegressionModel(Model):
     def train(self, X_train, y_train):
-        their_model = LinearRegression()
-        trained_LR = their_model.fit(X_train, y_train)
-        return trained_LR
+        model = LinearRegression()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
+
+class MyNaiveBayesModel(Model):
+    def train(self, X_train, y_train):
+        model = MyNaiveBayes()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
+    
+class NaiveBayesModel(Model):
+    def train(self, X_train, y_train):
+        model = MultinomialNB()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
