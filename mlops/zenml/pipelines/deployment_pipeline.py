@@ -57,7 +57,7 @@ def deployment_pipeline(min_accuracy: float = MIN_ACCURACY,
   mse, r2, rmse, acc = evaluate_model(model, X_test, y_test)
 
   # Only deploy if the accuracy is greater than the min_accuracy
-  should_deploy = deployment_trigger(accuracy=r2)
+  should_deploy = deployment_trigger(accuracy=acc)
 
 
   mlflow_model_deployer_step(

@@ -8,7 +8,8 @@ from models.model_dev import (
   MyLogisticRegressionModel,
   MyNaiveBayesModel, 
   NaiveBayesModel,
-  LogisticRegressionModel
+  LogisticRegressionModel,
+  SVMModel
 )
 from .config import ModelNameConfig
 from zenml import step
@@ -41,12 +42,7 @@ def train_model(
   try:
     # Automatically log models, scores, etc...
     mlflow.sklearn.autolog()
-    if config.model_name == LINEAR_REGRESSION:
-      model = LinearRegressionModel()
-      train_model = model.train(X_train, y_train)
-      return train_model
-    
-    elif config.model_name == LOGISTIC_REGRESSION:
+    if config.model_name == LOGISTIC_REGRESSION:
       model = LogisticRegressionModel()
       train_model = model.train(X_train, y_train)
       return train_model
@@ -66,6 +62,17 @@ def train_model(
       train_model = model.train(X_train, y_train)
       return train_model
 
+    elif config.model_name == SVM:
+      model = SVMModel()
+      train_model = model.train(X_train, y_train)
+      return train_model
+    
+    # Test model
+    elif config.model_name == LINEAR_REGRESSION:
+      model = LinearRegressionModel()
+      train_model = model.train(X_train, y_train)
+      return train_model
+    
     else:
       raise ValueError(f"Model {config.model_name} not supported.")
 

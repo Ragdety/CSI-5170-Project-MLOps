@@ -1,4 +1,5 @@
 from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
 from abc import ABC, abstractmethod
 from models.LogisticRegression import MyLogisticRegression
@@ -38,5 +39,11 @@ class MyNaiveBayesModel(Model):
 class NaiveBayesModel(Model):
     def train(self, X_train, y_train):
         model = MultinomialNB()
+        trained_model = model.fit(X_train, y_train)
+        return trained_model
+    
+class SVMModel(Model):
+    def train(self, X_train, y_train):
+        model = SVC(kernel = 'rbf')
         trained_model = model.fit(X_train, y_train)
         return trained_model
